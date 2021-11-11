@@ -1,1 +1,33 @@
 Creating a static website using Amazon S3
+
+Login to console and go to S3.
+Create a new bucket
+  Must ba a universal name
+We want this bucket to be public
+  Uncheck all private bucket boxes
+Keep all other selections default.
+Upload both html files. (index and error pages)
+We now have to enable static website hosting for the bucket.
+In properties enable Static website hosting
+Website endpoint URL should be available
+If you click on this you should get an error code. 
+Tthe bucket to be public, but contents like our html pages are not.
+Creating a bucket policy should fix this issue.
+In the Permissions tab click edit in the Bucket Policy section.
+The following is a policy example that can be used.
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": ""arn:aws:s3:::<BUCKET-NAME>/*""
+        }
+    ]
+}
+
+Save changes
+You can reload html page and confirm that it's working.
